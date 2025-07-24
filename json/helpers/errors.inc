@@ -1,10 +1,13 @@
 /**
  * vim: set ts=4 :
  * =============================================================================
+ * sm-json
+ * A pure SourcePawn JSON encoder/decoder.
+ * https://github.com/clugg/sm-json
+ *
+ * sm-json (C)2022 James Dickens. (clug)
  * SourceMod (C)2004-2008 AlliedModders LLC.  All rights reserved.
  * =============================================================================
- *
- * This file is part of the SourceMod/SourcePawn SDK.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License, version 3.0, as published by the
@@ -26,24 +29,36 @@
  * this exception to all derivative works.  AlliedModders LLC defines further
  * exceptions, found in LICENSE.txt (as of this writing, version JULY-31-2007),
  * or <http://www.sourcemod.net/license.php>.
- *
- * Version: $Id$
  */
 
-#if defined _version_included
+#if defined _json_helpers_errors_included
  #endinput
 #endif
-#define _version_included
+#define _json_helpers_errors_included
 
-#tryinclude <version_auto>
+static char g_jsonLastError[1024] = "";
 
-#if !defined _auto_version_included
- #define SOURCEMOD_V_TAG         "manual"
- #define SOURCEMOD_V_REV         0
- #define SOURCEMOD_V_CSET        "0"
- #define SOURCEMOD_V_MAJOR       1               /**< SourceMod Major version */
- #define SOURCEMOD_V_MINOR       13              /**< SourceMod Minor version */
- #define SOURCEMOD_V_RELEASE     0               /**< SourceMod Release version */
+/**
+ * Stores the error provided as the 'last error' for later access.
+ * @internal
+ *
+ * @param error     Error to store.
+ * @param ...       Further arguments to pass to message formatter.
+ */
+stock void json_set_last_error(const char[] error, any ...)
+{
+    VFormat(g_jsonLastError, sizeof(g_jsonLastError), error, 2);
+}
 
- #define SOURCEMOD_VERSION       "1.13.0-manual" /**< SourceMod version string (major.minor.release-tag) */
-#endif
+/**
+ * Retrieves the last error encountered and stores it in the buffer provided.
+ *
+ * @param buffer       String buffer.
+ * @param max_size     Maximum size of string buffer.
+ * @return             True if the error was copied successfuly,
+ *                     false otherwise.
+ */
+stock bool json_get_last_error(char[] buffer, int max_size)
+{
+    return strcopy(buffer, max_size, g_jsonLastError) > 0;
+}
