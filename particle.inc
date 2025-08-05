@@ -3,6 +3,7 @@
  * File: particle.inc
  * Description: Functions to show TF2 particles
  * Author(s): L. Duke
+ * url: https://github.com/GIider/Upgrademod/blob/master/third_party/sourcemod/scripting/include/particle.inc
  */
 
 #if defined _particle_included
@@ -218,12 +219,12 @@ stock void TE_SetupParticle(const char[] Name, const float origin[3] = NULL_VECT
 {
     // find string table
     int tblidx = FindStringTable("ParticleEffectNames");
-    if (tblidx == INVALID_STRING_TABLE) 
+    if (tblidx == INVALID_STRING_TABLE)
     {
         LogError("Could not find string table: ParticleEffectNames");
         return;
     }
-    
+
     // find particle index
     char tmp[256];
     int count = GetStringTableNumStrings(tblidx);
@@ -242,7 +243,7 @@ stock void TE_SetupParticle(const char[] Name, const float origin[3] = NULL_VECT
         LogError("Could not find particle: %s", Name);
         return;
     }
-    
+
     TE_Start("TFParticleEffect");
     TE_WriteFloat("m_vecOrigin[0]", origin[0]);
     TE_WriteFloat("m_vecOrigin[1]", origin[1]);
@@ -268,7 +269,7 @@ stock void TE_SetupParticle(const char[] Name, const float origin[3] = NULL_VECT
         TE_WriteNum("m_iAttachmentPointIndex", attachpoint);
     }
 
-    TE_WriteNum("m_bResetParticles", resetParticles);    
+    TE_WriteNum("m_bResetParticles", resetParticles);
 }
 
 stock void TE_Particle(const char Name, const float origin[3] = NULL_VECTOR,
@@ -281,4 +282,3 @@ stock void TE_Particle(const char Name, const float origin[3] = NULL_VECTOR,
 
     TE_SendToAll(delay);
 }
-

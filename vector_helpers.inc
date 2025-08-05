@@ -5,10 +5,16 @@
 
 #include <vector>
 
+/**
+ * Author   xXDeathreusXx
+ * url      https://forums.alliedmods.net/showthread.php?t=307906
+ */
+
+
 stock bool VectorsEqual(const float vec1[3], const float vec2[3], float tolerance = 0.001)
 {
-	return (FloatAbs(vec1[0] - vec2[0]) <= tolerance 
-			&& FloatAbs(vec1[1] - vec2[1]) <= tolerance 
+	return (FloatAbs(vec1[0] - vec2[0]) <= tolerance
+			&& FloatAbs(vec1[1] - vec2[1]) <= tolerance
 			&& FloatAbs(vec1[2] - vec2[2]) <= tolerance);
 }
 
@@ -78,21 +84,21 @@ stock void VectorRotateOnAxis(float vec[3], float dir[3], float degrees)
 {
 	float st, ct;
 	SinCos(DegToRad(degrees), st, ct);
-	
+
 	NormalizeVector(dir, dir);
-	
+
 	float f = dir[0];
 	float r = dir[1];
 	float u = dir[2];
-	
+
 	float x = vec[0];
 	float y = vec[1];
 	float z = vec[2];
-	
+
 	vec[0] += (ct + (1 - ct) * f*f) * x;
 	vec[0] += ((1 - ct) * f*r - u*st) * y;
 	vec[0] += ((1 - ct) * f*z + y*st) * z;
-	
+
 	vec[1] += ((1 - ct) * f*r + u*st) * x;
 	vec[1] += (ct + (1 - ct) * r*r) * y;
 	vec[1] += ((1 - ct) * r*u - f*st) * z;
@@ -106,9 +112,9 @@ stock void VectorMatrix(const float fwd[3], float matrix[3][3])
 {
 	float right[3], up[3];
 	GetVectorVectors(fwd, right, up);
-	
+
 	NegateVector(right);
-	
+
 	for(int x=0; x<3; ++x)
 	{
 		matrix[0][x] = fwd[x];
@@ -124,11 +130,11 @@ stock void AngleMatrix(const float ang[3], float matrix[3][3])
 	SinCos(DegToRad(ang[0]), sy, cy);
 	SinCos(DegToRad(ang[1]), sp, cp);
 	SinCos(DegToRad(ang[2]), sr, cr);
-	
+
 	matrix[0][0] = cp*cy;
 	matrix[1][0] = cp*sy;
 	matrix[2][0] = sp*-1.0;
-	
+
 	matrix[0][1] = sp*(sr*cy-cr*sy);
 	matrix[1][1] = sp*(sr*sy+cr*cy);
 	matrix[2][1] = sr*cp;
@@ -160,7 +166,7 @@ stock void MatrixVectors(const float matrix[3][3], float fwd[3], float right[3],
 		right[x] = matrix[1][x];
 		up[x] = matrix[2][x];
 	}
-	
+
 	NegateVector(right);
 }
 
@@ -168,15 +174,15 @@ stock void MatrixAngles(const float matrix[3][3], float ang[3])
 {
 	float fwd[3], right[3];
 	float up[3] = {0.0, 0.0, 1.0};
-	
+
 	for(int x=0; x<3; x++)
 	{
 		fwd[x] = matrix[0][x];
 		right[x] = matrix[1][x];
 	}
-	
+
 	up[2] = matrix[2][2];
-	
+
 	float xyD = SquareRoot(fwd[0] * fwd[0] + fwd[1] * fwd[1]);
 	if(xyD > 0.001)
 	{
