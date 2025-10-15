@@ -103,6 +103,11 @@ methodmap Objective < AddressBase
 
     public native int GetEntityCount();
 
+    /**
+     * Returns an ArrayList filled with `string_t` instances of the entities' targetname.
+     * 
+     * @note            The array handle must be freed manually.
+    */
     public native ArrayList GetEntityList();
 
     /**
@@ -209,6 +214,19 @@ methodmap ObjectiveManager < AddressBase
     }
 
     property int _iObjectivesCount
+    {
+        public native get();
+    }
+
+    /**
+     * @note element type is Anti Objective object address.
+     */
+    property UtlVector _pAntiObjectivesVector
+    {
+        public native get();
+    }
+
+    property int _iAntiObjectivesCount
     {
         public native get();
     }
