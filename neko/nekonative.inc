@@ -1,3 +1,5 @@
+#define PLUGIN_VERSION "7.13NS"
+
 // AdminMenu
 /**
  * Returns Plugins Handle.
@@ -130,40 +132,3 @@ forward Action NekoSpecials_OnSetSpecialsNum();
 forward Action NekoSpecials_OnSetSpecialsTime();
 
 forward Action NekoSpecials_OnStartFirstSpawn();
-
-public SharedPlugin __pl_NekoSpecials =
-{
-	name = "NekoSpecials",
-	file = "NekoSpecials.smx",
-#if defined REQUIRE_PLUGIN
-	required = 1,
-#else
-	required = 0,
-#endif
-};
-
-#if !defined REQUIRE_PLUGIN
-public void __pl_NekoSpecials_SetNTVOptional()
-{
-	MarkNativeAsOptional("NekoAdminMenu_PlHandle");
-    MarkNativeAsOptional("NekoKillHud_PlHandle");
-    MarkNativeAsOptional("NekoKillHud_GetStatus");
-    MarkNativeAsOptional("NekoKillHud_GetStyle");
-    MarkNativeAsOptional("NekoServerName_PlHandle");
-
-    MarkNativeAsOptional("NekoVote_VoteStatus");
-    MarkNativeAsOptional("NekoServerName_ChangeCustomTest");
-    MarkNativeAsOptional("NekoVote_VoteStatus");
-    MarkNativeAsOptional("NekoSpecials_PlHandle");
-    MarkNativeAsOptional("NekoSpecials_GetSpawnMode");
-    MarkNativeAsOptional("NekoSpecials_GetPluginStatus");
-    MarkNativeAsOptional("NekoSpecials_GetSpecialsNum");
-    MarkNativeAsOptional("NekoSpecials_GetSpecialsTime");
-    MarkNativeAsOptional("NekoSpecials_GetSpecialsMode");
-    MarkNativeAsOptional("NekoSpecials_ShowSpecialsTips");
-    MarkNativeAsOptional("NekoSpecials_ShowSpecialsModeTips");
-    MarkNativeAsOptional("NekoSpecials_ReLoadAllConfig");
-    MarkNativeAsOptional("NekoSpecials_GetConVar");
-    MarkNativeAsOptional("NekoSpecials_ShowYourTips");
-}
-#endif

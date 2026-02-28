@@ -40,10 +40,12 @@ stock Address operator/(Address base, int offset)
 
 methodmap AddressBase
 {
-    property Address addr
-    {
-        public get()
-        {
+    public AddressBase(Address addr) {
+        return view_as<AddressBase>(addr);
+    }
+
+    property Address addr {
+        public get() {
             return view_as<Address>(this);
         }
     }
