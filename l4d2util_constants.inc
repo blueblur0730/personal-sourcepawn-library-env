@@ -498,19 +498,21 @@ stock const int WeaponSlots[WEPID_SIZE] =
  *
  * Or is it easier to get the survivor character index using netprop 'm_Gender'.
 */
-enum /*SurvivorCharacterType*/
+
+enum //SurvivorCharacterType
 {
 	SurvivorCharacter_Nick = 0,
 	SurvivorCharacter_Rochelle,
 	SurvivorCharacter_Coach,
 	SurvivorCharacter_Ellis,
-	SurvivorCharacter_Bill,
-	SurvivorCharacter_Zoey,
-	SurvivorCharacter_Francis,
-	SurvivorCharacter_Louis,
-	SurvivorCharacter_Invalid, // 8
+	//SurvivorCharacter_Bill,
+	//SurvivorCharacter_Zoey,
+	//SurvivorCharacter_Francis,
+	//SurvivorCharacter_Louis,
 
-	SurvivorCharacter_Size // 9 size
+	SurvivorCharacter_Invalid = 8, // 8
+
+	SurvivorCharacter_Size = 9 // 9 size
 };
 
 stock const char g_sSurvivorDisplayName[SurvivorCharacter_Size][] =
